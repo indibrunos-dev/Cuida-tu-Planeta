@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioLab Plantas: El Motor Verde de la Tierra</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --verde-profundo: #1b4332;
+            --verde-esmeralda: #2d6a4f;
+            --verde-lima: #52b788;
+            --verde-menta: #b7e4c7;
+            --cian-energia: #40e0d0;
+            --amarillo-solar: #ffd60a;
+            --blanco-brillante: #f7f9f6;
+            --gris-laboratorio: #e8e8e8;
+            --tierra: #8b6f47;
+            --texto-principal: #0d1b2a;
+            --sombra-suave: rgba(27, 67, 50, 0.15);
+            --rojo-youtube: #ff0000;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f7f9f6 0%, #e8f5e9 50%, #f1f8e9 100%);
+            color: var(--texto-principal);
+            overflow-x: hidden;
+        }
+
+        /* Fondo animado con partículas flotantes */
+        .fondo-animado {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particula {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(64, 224, 208, 0.6), rgba(64, 224, 208, 0));
+            border-radius: 50%;
+            animation: flotar linear infinite;
+        }
+
+        @keyframes flotar {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor principal */
+        .contenedor {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Secciones */
+        section {
+            margin: 40px 0;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== PORTADA PRINCIPAL ==================== */
+        .portada {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, rgba(45, 106, 79, 0.1), rgba(64, 224, 208, 0.05));
+            border-radius: 20px;
+            border: 2px solid rgba(45, 106, 79, 0.2);
+            backdrop-filter: blur(10px);
+            margin-bottom: 50px;
+        }
+
+        .portada h1 {
+            font-size: 3.5rem;
+            color: var(--verde-profundo);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .portada .subtitulo {
+            font-size: 1.5rem;
+            color: var(--verde-esmeralda);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .portada .descripcion {
+            font-size: 1.1rem;
+            color: var(--texto-principal);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .boton-principal {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--verde-esmeralda), var(--verde-lima));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(45, 106, 79, 0.3);
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        .boton-principal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(45, 106, 79, 0.4);
+        }
+
+        /* Tarjetas de datos rápidos */
+        .tarjetas-rapidas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .tarjeta-rapida {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--verde-lima);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tarjeta-rapida:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(82, 183, 136, 0.3);
+            border-color: var(--cian-energia);
+        }
+
+        .tarjeta-rapida strong {
+            color: var(--verde-profundo);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ==================== PLANTA INTERACTIVA ==================== */
+        .simulador-planta {
+            background: linear-gradient(to bottom, rgba(64, 224, 208, 0.05), rgba(139, 111, 71, 0.1));
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            border: 2px solid rgba(45, 106, 79, 0.2);
+            margin-bottom: 50px;
+        }
+
+        .simulador-planta h2 {
+            color: var(--verde-profundo);
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .planta-svg {
+            max-width: 400px;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 10px 20px rgba(27, 67, 50, 0.1));
+        }
+
+        svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .parte-planta {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .raiz {
+            fill: var(--tierra);
+            stroke: var(--tierra);
+            transition: all 0.3s ease;
+        }
+
+        .parte-planta:hover .raiz {
+            fill: #a0854a;
+            stroke: #a0854a;
+        }
+
+        .tallo {
+            fill: var(--verde-esmeralda);
+            transition: all 0.3s ease;
+        }
+
+        .parte-planta:hover .tallo {
+            fill: var(--verde-lima);
+        }
+
+        .hoja {
+            fill: var(--verde-lima);
+            transition: all 0.3s ease;
+            animation: balanceo 3s ease-in-out infinite;
+            transform-origin: 150px 150px;
+        }
+
+        .parte-planta:hover .hoja {
+            fill: #72efb4;
+        }
+
+        @keyframes balanceo {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Tarjeta informativa integrada */
+        .info-panel-fijo {
+            background: white;
+            border: 2px solid var(--verde-esmeralda);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 500px;
+            margin: 20px auto 0;
+            box-shadow: 0 10px 25px var(--sombra-suave);
+            transition: all 0.3s ease;
+        }
+
+        .info-panel-fijo h3 {
+            color: var(--verde-profundo);
+            margin-bottom: 10px;
+        }
+
+        /* ==================== ANATOMÍA MICROSCÓPICA (ESTOMAS) ==================== */
+        .estoma-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(45, 106, 79, 0.1);
+            text-align: center;
+        }
+
+        .estoma-section h2 {
+            color: var(--verde-profundo);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .estoma-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .visor-microscopio {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: #242424;
+            border: 8px solid var(--verde-profundo);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .lente-iluminado {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(82, 183, 136, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .estoma-celulas {
+            display: flex;
+            gap: 4px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .celula-oclusiva {
+            width: 60px;
+            height: 140px;
+            background: linear-gradient(to right, #74c69d, #52b788);
+            border: 3px solid var(--verde-profundo);
+            border-radius: 50% / 30% 30% 70% 70%;
+            box-shadow: inset -5px 0 10px rgba(0,0,0,0.15);
+        }
+
+        .celula-oclusiva.izquierda {
+            border-radius: 40px 10px 10px 40px / 70px 30px 30px 70px;
+            transform-origin: right center;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .celula-oclusiva.derecha {
+            border-radius: 10px 40px 40px 10px / 30px 70px 70px 30px;
+            transform-origin: left center;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .visor-microscopio.abierto .celula-oclusiva.izquierda {
+            transform: scaleX(0.8) rotate(-12deg);
+            border-radius: 50px 5px 5px 50px / 70px 20px 20px 70px;
+        }
+
+        .visor-microscopio.abierto .celula-oclusiva.derecha {
+            transform: scaleX(0.8) rotate(12deg);
+            border-radius: 5px 50px 50px 5px / 20px 70px 70px 20px;
+        }
+
+        .visor-microscopio.abierto .estoma-celulas {
+            gap: 35px;
+        }
+
+        .ostiolo-orificio {
+            position: absolute;
+            width: 0px;
+            height: 90px;
+            background: #111;
+            border-radius: 50%;
+            transition: all 0.5s ease-in-out;
+            z-index: 1;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+        }
+
+        .visor-microscopio.abierto .ostiolo-orificio {
+            width: 30px;
+        }
+
+        .explicacion-estoma {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--verde-esmeralda);
+            text-align: left;
+        }
+
+        /* ==================== SIMULADOR DE FOTOSÍNTESIS ==================== */
+        .laboratorio-fotosintesis {
+            background: linear-gradient(135deg, rgba(82, 183, 136, 0.08), rgba(255, 214, 10, 0.05));
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(45, 106, 79, 0.2);
+        }
+
+        .laboratorio-fotosintesis h2 {
+            color: var(--verde-profundo);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .pantalla-simulador {
+            background: linear-gradient(to bottom, #a3c2f0 0%, #eef4fc 70%, #dcd1c4 100%);
+            border: 3px solid var(--verde-profundo);
+            border-radius: 15px;
+            height: 320px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.1), 0 10px 25px rgba(0,0,0,0.1);
+            transition: background 0.5s ease;
+        }
+
+        .sim-sol {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            width: 60px;
+            height: 60px;
+            background: var(--amarillo-solar);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--amarillo-solar);
+            transition: all 0.5s ease;
+        }
